@@ -47,10 +47,25 @@ async function getWeather(city) {
         document.querySelector('.wind-desc').innerHTML = Math.round(data.wind.speed * 3.6) + ' km/h'; // Convert m/s to km/h
         
         // Update weather icon based on weather condition
-        const weatherCondition = data.weather[0].main.toLowerCase();
-        const iconPath = weatherIcons[weatherCondition] || 'images/clouds.png'; // Default to clouds if condition not found
-        weatherImg.src = iconPath;
-        weatherImg.alt = data.weather[0].description;
+       if(data.weather[0].main == "Clouds") {
+        weatherImg.src = "images/clouds.png";
+       } else if(data.weather[0].main == "Clear") {
+        weatherImg.src = "images/clear.png";
+       } else if(data.weather[0].main == "Rain") {
+        weatherImg.src = "images/rain.png";
+       } else if(data.weather[0].main == "Drizzle") {
+        weatherImg.src = "images/drizzle.png";
+       } else if(data.weather[0].main == "Mist") {
+        weatherImg.src = "images/mist.png";
+       } else if(data.weather[0].main == "Snow") {
+        weatherImg.src = "images/snow.png";
+       } else if(data.weather[0].main == "Thunderstorm") {
+        weatherImg.src = "images/thunderstorm.png";
+       } else {
+        weatherImg.src = "images/default.png"; // Fallback image
+       }
+        
+        console.log('Weather data updated successfully');
         
     } catch (error) {
         console.error('Error fetching weather:', error);
